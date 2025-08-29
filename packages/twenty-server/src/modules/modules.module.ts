@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 
 import { CalendarModule } from 'src/modules/calendar/calendar.module';
+import { CallingModule } from 'src/modules/calling/calling.module';
 import { ConnectedAccountModule } from 'src/modules/connected-account/connected-account.module';
 import { FavoriteFolderModule } from 'src/modules/favorite-folder/favorite-folder.module';
 import { FavoriteModule } from 'src/modules/favorite/favorite.module';
@@ -12,6 +13,7 @@ import { WorkflowModule } from 'src/modules/workflow/workflow.module';
   imports: [
     MessagingModule,
     CalendarModule,
+    CallingModule,
     ConnectedAccountModule,
     ViewModule,
     WorkflowModule,

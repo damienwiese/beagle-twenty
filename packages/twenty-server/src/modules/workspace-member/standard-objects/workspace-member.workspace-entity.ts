@@ -6,7 +6,7 @@ import { FieldMetadataType } from 'twenty-shared/types';
 
 import { NumberDataType } from 'src/engine/metadata-modules/field-metadata/interfaces/field-metadata-settings.interface';
 import { RelationOnDeleteAction } from 'src/engine/metadata-modules/field-metadata/interfaces/relation-on-delete-action.interface';
-import { RelationType } from 'src/engine/metadata-modules/field-metadata/interfaces/relation-type.interface';
+import { RelationMetadataType } from 'src/engine/metadata-modules/relation-metadata/relation-metadata.entity';
 import { Relation } from 'src/engine/workspace-manager/workspace-sync-metadata/interfaces/relation.interface';
 
 import { SEARCH_VECTOR_FIELD } from 'src/engine/metadata-modules/constants/search-vector-field.constants';
@@ -24,9 +24,11 @@ import { WorkspaceRelation } from 'src/engine/twenty-orm/decorators/workspace-re
 import { WORKSPACE_MEMBER_STANDARD_FIELD_IDS } from 'src/engine/workspace-manager/workspace-sync-metadata/constants/standard-field-ids';
 import { STANDARD_OBJECT_ICONS } from 'src/engine/workspace-manager/workspace-sync-metadata/constants/standard-object-icons';
 import { STANDARD_OBJECT_IDS } from 'src/engine/workspace-manager/workspace-sync-metadata/constants/standard-object-ids';
+import { CallWorkspaceEntity } from 'src/engine/workspace-manager/workspace-sync-metadata/standard-objects/call.workspace-entity';
+import { PhoneNumberWorkspaceEntity } from 'src/engine/workspace-manager/workspace-sync-metadata/standard-objects/phone-number.workspace-entity';
 import {
-  type FieldTypeAndNameMetadata,
-  getTsVectorColumnExpressionFromFields,
+    type FieldTypeAndNameMetadata,
+    getTsVectorColumnExpressionFromFields,
 } from 'src/engine/workspace-manager/workspace-sync-metadata/utils/get-ts-vector-column-expression.util';
 import { AttachmentWorkspaceEntity } from 'src/modules/attachment/standard-objects/attachment.workspace-entity';
 import { BlocklistWorkspaceEntity } from 'src/modules/blocklist/standard-objects/blocklist.workspace-entity';
@@ -251,7 +253,7 @@ export class WorkspaceMemberWorkspaceEntity extends BaseWorkspaceEntity {
   // Relations
   @WorkspaceRelation({
     standardId: WORKSPACE_MEMBER_STANDARD_FIELD_IDS.assignedTasks,
-    type: RelationType.ONE_TO_MANY,
+    type: RelationMetadataType.ONE_TO_MANY,
     label: msg`Assigned tasks`,
     description: msg`Tasks assigned to the workspace member`,
     icon: 'IconCheckbox',
@@ -263,7 +265,7 @@ export class WorkspaceMemberWorkspaceEntity extends BaseWorkspaceEntity {
 
   @WorkspaceRelation({
     standardId: WORKSPACE_MEMBER_STANDARD_FIELD_IDS.favorites,
-    type: RelationType.ONE_TO_MANY,
+    type: RelationMetadataType.ONE_TO_MANY,
     label: msg`Favorites`,
     description: msg`Favorites linked to the workspace member`,
     icon: 'IconHeart',
@@ -275,7 +277,7 @@ export class WorkspaceMemberWorkspaceEntity extends BaseWorkspaceEntity {
 
   @WorkspaceRelation({
     standardId: WORKSPACE_MEMBER_STANDARD_FIELD_IDS.accountOwnerForCompanies,
-    type: RelationType.ONE_TO_MANY,
+    type: RelationMetadataType.ONE_TO_MANY,
     label: msg`Account Owner For Companies`,
     description: msg`Account owner for companies`,
     icon: 'IconBriefcase',
@@ -287,7 +289,7 @@ export class WorkspaceMemberWorkspaceEntity extends BaseWorkspaceEntity {
 
   @WorkspaceRelation({
     standardId: WORKSPACE_MEMBER_STANDARD_FIELD_IDS.authoredAttachments,
-    type: RelationType.ONE_TO_MANY,
+    type: RelationMetadataType.ONE_TO_MANY,
     label: msg`Authored attachments`,
     description: msg`Attachments created by the workspace member`,
     icon: 'IconFileImport',
@@ -300,7 +302,7 @@ export class WorkspaceMemberWorkspaceEntity extends BaseWorkspaceEntity {
 
   @WorkspaceRelation({
     standardId: WORKSPACE_MEMBER_STANDARD_FIELD_IDS.connectedAccounts,
-    type: RelationType.ONE_TO_MANY,
+    type: RelationMetadataType.ONE_TO_MANY,
     label: msg`Connected accounts`,
     description: msg`Connected accounts`,
     icon: 'IconAt',
@@ -312,7 +314,7 @@ export class WorkspaceMemberWorkspaceEntity extends BaseWorkspaceEntity {
 
   @WorkspaceRelation({
     standardId: WORKSPACE_MEMBER_STANDARD_FIELD_IDS.messageParticipants,
-    type: RelationType.ONE_TO_MANY,
+    type: RelationMetadataType.ONE_TO_MANY,
     label: msg`Message Participants`,
     description: msg`Message Participants`,
     icon: 'IconUserCircle',
@@ -324,7 +326,7 @@ export class WorkspaceMemberWorkspaceEntity extends BaseWorkspaceEntity {
 
   @WorkspaceRelation({
     standardId: WORKSPACE_MEMBER_STANDARD_FIELD_IDS.blocklist,
-    type: RelationType.ONE_TO_MANY,
+    type: RelationMetadataType.ONE_TO_MANY,
     label: msg`Blocklist`,
     description: msg`Blocklisted handles`,
     icon: 'IconForbid2',
@@ -336,7 +338,7 @@ export class WorkspaceMemberWorkspaceEntity extends BaseWorkspaceEntity {
 
   @WorkspaceRelation({
     standardId: WORKSPACE_MEMBER_STANDARD_FIELD_IDS.calendarEventParticipants,
-    type: RelationType.ONE_TO_MANY,
+    type: RelationMetadataType.ONE_TO_MANY,
     label: msg`Calendar Event Participants`,
     description: msg`Calendar Event Participants`,
     icon: 'IconCalendar',
@@ -350,7 +352,7 @@ export class WorkspaceMemberWorkspaceEntity extends BaseWorkspaceEntity {
 
   @WorkspaceRelation({
     standardId: WORKSPACE_MEMBER_STANDARD_FIELD_IDS.timelineActivities,
-    type: RelationType.ONE_TO_MANY,
+    type: RelationMetadataType.ONE_TO_MANY,
     label: msg`Events`,
     description: msg`Events linked to the workspace member`,
     icon: 'IconTimelineEvent',
@@ -376,4 +378,43 @@ export class WorkspaceMemberWorkspaceEntity extends BaseWorkspaceEntity {
   @WorkspaceIsSystem()
   @WorkspaceFieldIndex({ indexType: IndexType.GIN })
   searchVector: string;
+
+  @WorkspaceRelation({
+    standardId: WORKSPACE_MEMBER_STANDARD_FIELD_IDS.assignedCalls,
+    type: RelationMetadataType.ONE_TO_MANY,
+    label: msg`Assigned Calls`,
+    description: msg`Calls assigned to this member`,
+    icon: 'IconPhone',
+    inverseSideTarget: () => CallWorkspaceEntity,
+    onDelete: RelationOnDeleteAction.SET_NULL,
+  })
+  @WorkspaceIsNullable()
+  @WorkspaceIsSystem()
+  assignedCalls: Relation<CallWorkspaceEntity[]>;
+
+  @WorkspaceRelation({
+    standardId: WORKSPACE_MEMBER_STANDARD_FIELD_IDS.createdCalls,
+    type: RelationMetadataType.ONE_TO_MANY,
+    label: msg`Created Calls`,
+    description: msg`Calls created by this member`,
+    icon: 'IconPhone',
+    inverseSideTarget: () => CallWorkspaceEntity,
+    onDelete: RelationOnDeleteAction.SET_NULL,
+  })
+  @WorkspaceIsNullable()
+  @WorkspaceIsSystem()
+  createdCalls: Relation<CallWorkspaceEntity[]>;
+
+  @WorkspaceRelation({
+    standardId: WORKSPACE_MEMBER_STANDARD_FIELD_IDS.assignedPhoneNumbers,
+    type: RelationMetadataType.ONE_TO_MANY,
+    label: msg`Assigned Phone Numbers`,
+    description: msg`Phone numbers assigned to this member`,
+    icon: 'IconPhone',
+    inverseSideTarget: () => PhoneNumberWorkspaceEntity,
+    onDelete: RelationOnDeleteAction.SET_NULL,
+  })
+  @WorkspaceIsNullable()
+  @WorkspaceIsSystem()
+  assignedPhoneNumbers: Relation<PhoneNumberWorkspaceEntity[]>;
 }

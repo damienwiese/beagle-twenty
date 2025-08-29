@@ -1,7 +1,5 @@
 import path from 'path';
 import { defineConfig } from 'vite';
-import dts from 'vite-plugin-dts';
-import tsconfigPaths from 'vite-tsconfig-paths';
 import packageJson from './package.json';
 
 const moduleEntries = Object.keys((packageJson as any).exports || {})
@@ -31,7 +29,9 @@ const entryFileNames = (chunk: any, extension: 'cjs' | 'mjs') => {
   return `${moduleDirectory}.${extension}`;
 };
 
-export default defineConfig(() => {
+export default defineConfig(async () => {
+  const { default: tsconfigPaths } = await import('vite-tsconfig-paths');
+  const { default: dts } = await import('vite-plugin-dts');
   const tsConfigPath = path.resolve(__dirname, './tsconfig.lib.json');
 
   return {

@@ -135,6 +135,7 @@ export const COMPANY_STANDARD_FIELD_IDS = {
   attachments: '20202020-c1b5-4120-b0f0-987ca401ed53',
   timelineActivities: '20202020-0414-4daf-9c0d-64fe7b27f89f',
   searchVector: '85c71601-72f9-4b7b-b343-d46100b2c74d',
+  calls: '20202020-2a3b-4c5d-6e7f-890123456789',
 } as const;
 
 export const CONNECTED_ACCOUNT_STANDARD_FIELD_IDS = {
@@ -352,6 +353,7 @@ export const PERSON_STANDARD_FIELD_IDS = {
   calendarEventParticipants: '20202020-52ee-45e9-a702-b64b3753e3a9',
   timelineActivities: '20202020-a43e-4873-9c23-e522de906ce5',
   searchVector: '57d1d7ad-fa10-44fc-82f3-ad0959ec2534',
+  calls: '20202020-1d2e-3f4a-5b6c-789012345678',
 } as const;
 
 export const TASK_STANDARD_FIELD_IDS = {
@@ -520,6 +522,9 @@ export const WORKSPACE_MEMBER_STANDARD_FIELD_IDS = {
   timeFormat: '20202020-8acb-4cf8-a851-a6ed443c8d81',
   searchVector: '20202020-46d0-4e7f-bc26-74c0edaeb619',
   calendarStartDay: '20202020-92d0-1d7f-a126-25ededa6b142',
+  assignedCalls: '20202020-1a2b-3c4d-5e6f-789012345678',
+  createdCalls: '20202020-9f8e-7d6c-5b4a-321098765432',
+  assignedPhoneNumbers: '20202020-5a6b-7c8d-9e0f-123456789abc',
 } as const;
 
 export const CUSTOM_OBJECT_STANDARD_FIELD_IDS = {
@@ -581,4 +586,46 @@ export const STANDARD_OBJECT_FIELD_IDS = {
   workflowRun: WORKFLOW_RUN_STANDARD_FIELD_IDS,
   workflowVersion: WORKFLOW_VERSION_STANDARD_FIELD_IDS,
   workspaceMember: WORKSPACE_MEMBER_STANDARD_FIELD_IDS,
+  call: CALL_STANDARD_FIELD_IDS,
+  phoneNumber: PHONE_NUMBER_STANDARD_FIELD_IDS,
+  callQueue: CALL_QUEUE_STANDARD_FIELD_IDS,
+} as const;
+
+export const CALL_STANDARD_FIELD_IDS = {
+  externalId: '20202020-1c2d-3e4f-5a6b-789012345678',
+  direction: '20202020-9f8e-7d6c-5b4a-321098765432',
+  status: '20202020-5a6b-7c8d-9e0f-123456789abc',
+  outcome: '20202020-2b3c-4d5e-6f7a-890123456789',
+  fromNumber: '20202020-8g9h-0i1j-2k3l-456789012345',
+  toNumber: '20202020-4m5n-6o7p-8q9r-012345678901',
+  duration: '20202020-0s1t-2u3v-4w5x-678901234567',
+  recordingUrl: '20202020-6y7z-8a9b-0c1d-234567890123',
+  recordingSid: '20202020-2e3f-4g5h-6i7j-890123456789',
+  transcription: '20202020-8k9l-0m1n-2o3p-456789012345',
+  notes: '20202020-4q5r-6s7t-8u9v-012345678901',
+  startTime: '20202020-0w1x-2y3z-4a5b-678901234567',
+  endTime: '20202020-6c7d-8e9f-0g1h-234567890123',
+  cost: '20202020-2i3j-4k5l-6m7n-890123456789',
+  person: '20202020-8o9p-0q1r-2s3t-456789012345',
+  company: '20202020-4u5v-6w7x-8y9z-012345678901',
+  assignedUser: '20202020-0a1b-2c3d-4e5f-678901234567',
+  createdBy: '20202020-6g7h-8i9j-0k1l-234567890123',
+} as const;
+
+export const PHONE_NUMBER_STANDARD_FIELD_IDS = {
+  phoneNumber: '20202020-1m2n-3o4p-5q6r-789012345678',
+  friendlyName: '20202020-7s8t-9u0v-1w2x-345678901234',
+  twilioSid: '20202020-3y4z-5a6b-7c8d-901234567890',
+  capabilities: '20202020-9e0f-1g2h-3i4j-567890123456',
+  isActive: '20202020-5k6l-7m8n-9o0p-123456789012',
+  isPrimary: '20202020-1q2r-3s4t-5u6v-789012345678',
+  assignedUser: '20202020-7w8x-9y0z-1a2b-345678901234',
+} as const;
+
+export const CALL_QUEUE_STANDARD_FIELD_IDS = {
+  name: '20202020-3c4d-5e6f-7g8h-901234567890',
+  description: '20202020-9i0j-1k2l-3m4n-567890123456',
+  isActive: '20202020-5o6p-7q8r-9s0t-123456789012',
+  distributionMethod: '20202020-1u2v-3w4x-5y6z-789012345678',
+  maxWaitTime: '20202020-7a8b-9c0d-1e2f-345678901234',
 } as const;

@@ -1,3 +1,6 @@
+import { CallQueueWorkspaceEntity } from 'src/engine/workspace-manager/workspace-sync-metadata/standard-objects/call-queue.workspace-entity';
+import { CallWorkspaceEntity } from 'src/engine/workspace-manager/workspace-sync-metadata/standard-objects/call.workspace-entity';
+import { PhoneNumberWorkspaceEntity } from 'src/engine/workspace-manager/workspace-sync-metadata/standard-objects/phone-number.workspace-entity';
 import { AttachmentWorkspaceEntity } from 'src/modules/attachment/standard-objects/attachment.workspace-entity';
 import { BlocklistWorkspaceEntity } from 'src/modules/blocklist/standard-objects/blocklist.workspace-entity';
 import { CalendarChannelEventAssociationWorkspaceEntity } from 'src/modules/calendar/common/standard-objects/calendar-channel-event-association.workspace-entity';
@@ -71,4 +74,7 @@ export const standardObjectMetadataDefinitions = [
   PersonWorkspaceEntity,
   TaskWorkspaceEntity,
   TaskTargetWorkspaceEntity,
+  CallWorkspaceEntity,
+  PhoneNumberWorkspaceEntity,
+  CallQueueWorkspaceEntity,
 ];
